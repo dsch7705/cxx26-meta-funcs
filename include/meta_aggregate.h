@@ -1,6 +1,6 @@
 #pragma once
 
-#include <meta>
+#include "meta_print.h"
 
 // Bake member information into the structure of an incomplete type.
 consteval auto bake_aggregate(std::meta::info shell, std::span<const std::meta::info> member_types, std::vector<std::string_view> member_names = {})
@@ -10,7 +10,7 @@ consteval auto bake_aggregate(std::meta::info shell, std::span<const std::meta::
   }
 
   if (is_complete_type(shell)) {
-    throw std::meta::exception("Cannot define an aggregate for a complete type", shell);
+    throw_meta_exception("Cannot define an aggregate for a complete type", shell);
   }
 
   std::vector<std::meta::info> specs;
@@ -35,7 +35,7 @@ consteval auto bake_aggregate(std::meta::info shell, std::span<const std::meta::
 consteval auto mimic_aggregate(std::meta::info shell, std::meta::info source)
 {
   if (!is_aggregate_type(source)) {
-    throw std::meta::exception("source must be an aggregate type", source);
+    throw_meta_exception("source must be an aggregate type", source);
   }
 
   auto members = nonstatic_data_members_of(source, std::meta::access_context::unchecked());
@@ -61,7 +61,7 @@ consteval auto compose_aggregate(std::meta::info shell, std::span<const std::met
   std::vector<std::string_view> member_names;
   for (auto s : sources) {
     if (!is_aggregate_type(s)) {
-      throw std::meta::exception("source must be an aggregate type", s);
+      throw_meta_exception("source must be an aggregate type", s);
     }
 
     auto members = nonstatic_data_members_of(s, std::meta::access_context::unchecked());

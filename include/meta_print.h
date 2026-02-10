@@ -3,6 +3,15 @@
 #include <meta>
 #include <print>
 
+#if defined(__clang__)
+  #define throw_meta_exception(msg, what) ((void)0)
+#else
+  #define throw_meta_exception(msg, what) \
+    do { \
+      throw std::meta::exception((msg), (what)); \
+    } while (0)
+#endif
+
 template <std::meta::info R>
 void print_type_of()
 {

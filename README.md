@@ -5,8 +5,10 @@
 - Iterate over and print the members of a type
 
 ## Prerequisites
-- GCC 16+
 - CMake 4.0+
+- One of the following compilers:
+  - GCC 16+
+  - Bloomberg's P2996 Clang fork
 
 ## Example
 ```c++

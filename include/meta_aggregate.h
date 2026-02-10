@@ -5,12 +5,11 @@
 // Bake member information into the structure of an incomplete type.
 consteval auto bake_aggregate(std::meta::info shell, std::span<const std::meta::info> member_types, std::vector<std::string_view> member_names = {})
 {
-  auto specialization = shell;
   if (is_template(shell)) {
-    specialization = substitute(shell, member_types);
+    shell = substitute(shell, member_types);
   }
 
-  if (is_complete_type(specialization)) {
+  if (is_complete_type(shell)) {
     throw std::meta::exception("Cannot define an aggregate for a complete type", shell);
   }
 
@@ -29,9 +28,7 @@ consteval auto bake_aggregate(std::meta::info shell, std::span<const std::meta::
       specs.push_back(data_member_spec(t, {.name = buf.data()}));
     }
   }
-
-  define_aggregate(specialization, specs);
-  return specialization;
+  return define_aggregate(shell, specs);
 }
 
 // Mirror the nonstatic data members of source into shell.

@@ -3,12 +3,6 @@
 #include <meta>
 #include <print>
 
-consteval auto normalize_type(std::meta::info r)
-{
-  if (is_type(r)) return r;
-  return type_of(r);
-}
-
 template <std::meta::info R>
 void print_type_of()
 {

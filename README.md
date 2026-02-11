@@ -11,6 +11,16 @@
   - Bloomberg's P2996 Clang fork
 
 ## Example
+### Building the example
+```shell
+git clone https://github.com/dsch7705/cxx26-meta-funcs.git
+cd cxx26-meta-funcs
+
+mkdir build && cd build
+
+cmake -DCMAKE_C_COMPILER=/path/to/c/compiler -DCMAKE_CXX_COMPILER=/path/to/cxx/compiler ..
+cmake --build .
+```
 ### main.cpp
 ```c++
 #include "meta_aggregate.h"
@@ -47,13 +57,9 @@ float Shell<>::two
 double Shell<>::three
 char Shell<>::four
 ```
-### Building the example
-```shell
-git clone https://github.com/dsch7705/cxx26-meta-funcs.git
-cd cxx26-meta-funcs
 
-mkdir build && cd build
-
-cmake -DCMAKE_C_COMPILER=/path/to/c/compiler -DCMAKE_CXX_COMPILER=/path/to/cxx/compiler ..
-cmake --build .
+## Using in a CMake project
+```cmake
+add_subdirectory(cxx26-meta-funcs)
+target_link_libraries(example PRIVATE meta-funcs)
 ```

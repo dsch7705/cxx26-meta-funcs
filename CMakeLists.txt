@@ -22,9 +22,11 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 
   set(CLANG_STDLIB_DIR ${CLANG_DIR}/lib/${CLANG_TARGET_TRIPLE})
 
-  target_include_directories(meta-funcs INTERFACE ${CLANG_DIR}/lib/clang/21/include)
-  target_include_directories(meta-funcs INTERFACE ${CLANG_DIR}/include/c++/v1)
-  target_include_directories(meta-funcs INTERFACE ${CLANG_DIR}/include/${CLANG_TARGET_TRIPLE}/c++/v1)
+  target_include_directories(meta-funcs INTERFACE 
+    ${CLANG_DIR}/lib/clang/21/include
+    ${CLANG_DIR}/include/c++/v1
+    ${CLANG_DIR}/include/${CLANG_TARGET_TRIPLE}/c++/v1
+  )
 
   target_compile_options(meta-funcs INTERFACE 
     -nostdinc++

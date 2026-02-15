@@ -31,6 +31,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(meta-funcs INTERFACE 
     -nostdinc++
     -fexpansion-statements
+    -fannotation-attributes
   )
 
   target_link_libraries(meta-funcs INTERFACE
